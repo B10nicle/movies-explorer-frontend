@@ -1,3 +1,3 @@
-[макет](https://disk.yandex.ru/d/-tmWGoOnzdSIwQ)
+[Макет](https://disk.yandex.ru/d/-tmWGoOnzdSIwQ)
 
-[сайт](https://project.nomoredomains.rocks/)
+[Сайт](https://project.nomoredomains.rocks/)

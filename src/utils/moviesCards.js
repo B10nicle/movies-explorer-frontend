@@ -85,11 +85,5 @@ export const savedMovies = [
         image: 'https://i122.fastpic.org/thumb/2023/0722/3e/e1d57ff84d43f9bbd7bd840545afbc3e.jpeg',
         nameRU: 'В погоне за Бенкси',
         movieId: '2',
-    },
-    {
-        duration: '1ч 42м',
-        image: 'https://i122.fastpic.org/thumb/2023/0722/3e/e1d57ff84d43f9bbd7bd840545afbc3e.jpeg',
-        nameRU: 'В погоне за Бенкси',
-        movieId: '3',
     }
 ]
