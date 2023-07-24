@@ -49,7 +49,7 @@ function Navigation(props) {
                                         ? "navigation__link navigation__link_active"
                                         : "navigation__link"
                                 }>
-                                Сохраненные фильмы
+                                Сохранённые фильмы
                             </NavLink>
                         </li>
                         <li className="navigation__link-container navigation__link-container_none">

@@ -87,13 +87,11 @@
 
 .profile__input:focus {
   outline: 1px solid #FF6838;
-  border-radius: 50px;
   width: 90%;
 }
 
 .profile__input:hover {
   outline: 1px solid #FF6838;
-  border-radius: 50px;
   width: 90%;
 }
 

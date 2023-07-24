@@ -34,6 +34,16 @@ function App() {
                     />
                     <Route
                         exact
+                        path="/profile"
+                        element={
+                            <>
+                                <Header auth={true}/>
+                                <Profile/>
+                            </>
+                        }
+                    />
+                    <Route
+                        exact
                         path="/movies"
                         element={
                             <>
@@ -51,16 +61,6 @@ function App() {
                                 <Header auth={true}/>
                                 <SavedMovies cards={savedMovies}/>
                                 <Footer/>
-                            </>
-                        }
-                    />
-                    <Route
-                        exact
-                        path="/profile"
-                        element={
-                            <>
-                                <Header auth={true}/>
-                                <Profile/>
                             </>
                         }
                     />

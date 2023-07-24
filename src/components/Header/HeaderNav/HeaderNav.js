@@ -21,7 +21,7 @@ function HeaderNav() {
                         className={({isActive}) => isActive
                             ? "header-nav__link header-nav__link_active"
                             : "header-nav__link"}>
-                        Сохраненные фильмы
+                        Сохранённые фильмы
                     </NavLink>
                 </li>
             </ul>
