@@ -26,6 +26,9 @@
 
 .header-auth__entry-button {
     background-color: #3DDC84;
+    justify-content: center;
+    flex-direction: column;
+    text-decoration: none;
     margin: 21px 0 21px 0;
     border-radius: 3px;
     text-align: center;
@@ -37,6 +40,7 @@
     font-size: 12px;
     cursor: pointer;
     color: #000000;
+    display: flex;
     border: none;
     padding: 0;
 }

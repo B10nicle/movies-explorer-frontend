@@ -52,14 +52,12 @@ function Navigation(props) {
                                 Сохранённые фильмы
                             </NavLink>
                         </li>
-                        <li className="navigation__link-container navigation__link-container_none">
-                            <button
-                                className="nav-profile-btn nav-profile-btn__display_open"
-                                type="button">
-                                <Link className="nav-profile-btn-link" to="/profile">
-                                    <p className="nav-profile-btn__text">Аккаунт</p>
+                        <li className="navigation__link-container">
+                                <Link
+                                    className="nav-profile-btn nav-profile-btn-link nav-profile-btn__display_open"
+                                    to="/profile">
+                                    Аккаунт
                                 </Link>
-                            </button>
                         </li>
                     </ul>
                 </nav>

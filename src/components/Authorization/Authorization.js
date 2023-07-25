@@ -29,7 +29,7 @@ function Authorization(props) {
                                 required/>
                         </li>)}
                     {props.authType === 'register' && (
-                        <p className='authorization__validation-text'>Что-то пошло не так...</p>
+                        <li className='authorization__validation-text'>Что-то пошло не так...</li>
                     )}
                     <li className='authorization__part-form'>
                         <p className='authorization__name'>E-mail</p>
@@ -43,7 +43,7 @@ function Authorization(props) {
                             maxLength="30"
                             required/>
                     </li>
-                    <p className='authorization__validation-text'>Что-то пошло не так...</p>
+                    <li className='authorization__validation-text'>Что-то пошло не так...</li>
                     <li className='authorization__part-form'>
                         <p className='authorization__name'>Пароль</p>
                         <input
@@ -56,7 +56,7 @@ function Authorization(props) {
                             maxLength="30"
                             required/>
                     </li>
-                    <p className='authorization__validation-text'>Что-то пошло не так...</p>
+                    <li className='authorization__validation-text'>Что-то пошло не так...</li>
                 </ul>
             </form>
             <div className='authorization__confirm'>

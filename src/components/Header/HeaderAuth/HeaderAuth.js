@@ -4,20 +4,8 @@ import "./HeaderAuth.css";
 function HeaderAuth() {
     return (
         <div className="header-auth">
-            <a href="/signup">
-                <button
-                    className="header-auth__signup-button"
-                    type="button">
-                    Регистрация
-                </button>
-            </a>
-            <a href="/signin">
-                <button
-                    className="header-auth__entry-button"
-                    type="button">
-                    Войти
-                </button>
-            </a>
+            <a href="/signup" className="header-auth__signup-button">Регистрация</a>
+            <a href="/signin" className="header-auth__entry-button">Войти</a>
         </div>
     );
 }

@@ -12,80 +12,52 @@ function Techs() {
             <nav className='tech__navigation'>
                 <a
                     href='https://ru.wikipedia.org/wiki/HTML'
-                    className='tech__link'
+                    className='tech__button tech__link'
                     rel="noreferrer"
                     target="_blank">
-                    <button
-                        className='tech__button'
-                        type='button'>
-                        HTML
-                    </button>
+                    HTML
                 </a>
                 <a
                     href='https://ru.wikipedia.org/wiki/CSS'
-                    className='tech__link'
+                    className='tech__button tech__link'
                     rel="noreferrer"
                     target="_blank">
-                    <button
-                        className='tech__button'
-                        type='button'>
-                        CSS
-                    </button>
+                    CSS
                 </a>
                 <a
                     href='https://www.javascript.com/'
-                    className='tech__link'
+                    className='tech__button tech__link'
                     rel="noreferrer"
                     target="_blank">
-                    <button
-                        className='tech__button'
-                        type='button'>
-                        JS
-                    </button>
+                    JS
                 </a>
                 <a
                     href='https://reactjs.org/'
-                    className='tech__link'
+                    className='tech__button tech__link'
                     rel="noreferrer"
                     target="_blank">
-                    <button
-                        className='tech__button'
-                        type='button'>
-                        React
-                    </button>
+                    React
                 </a>
                 <a
                     href='https://git-scm.com/'
-                    className='tech__link'
+                    className='tech__button tech__link'
                     rel="noreferrer"
                     target="_blank">
-                    <button
-                        className='tech__button'
-                        type='button'>
-                        Git
-                    </button>
+                    Git
                 </a>
                 <a
                     href='https://expressjs.com/ru/'
-                    className='tech__link'
+                    className='tech__button tech__link'
                     rel="noreferrer"
                     target="_blank">
-                    <button
-                        className='tech__button'
-                        type='button'>
-                        Express.js
-                    </button>
+                    Express.js
                 </a>
                 <a
                     href='https://www.mongodb.com/'
-                    className='tech__link'
+                    className='tech__button tech__link'
                     rel="noreferrer"
                     target="_blank">
-                    <button
-                        className='tech__button'
-                        type='button'>
-                        mongoDB
-                    </button>
+                    mongoDB
                 </a>
             </nav>
         </section>

@@ -19,6 +19,7 @@ function Profile() {
                         <input
                             className="profile__input"
                             placeholder="Виталий"
+                            id="user-name"
                             name="user-name"
                             type="text"
                             minLength="2"
@@ -36,6 +37,7 @@ function Profile() {
                             className="profile__input profile__input_bottom"
                             placeholder="pochta@yandex.ru"
                             type="email"
+                            id="user-email"
                             name="user-email"
                             required
                         />
