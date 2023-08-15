@@ -33,7 +33,7 @@
 }
 
 .header-nav__menu-button {
-  background-image: url("../../../../src/images/menu-button.svg");
+  background-image: url("../../../../src/images/header-nav__menu-button.svg");
   background-position: center;
   margin: 0 30px 0 0;
   min-height: 44px;
