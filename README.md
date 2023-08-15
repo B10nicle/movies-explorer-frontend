@@ -2,4 +2,4 @@
 
 [Сайт](https://project.nomoredomains.rocks/)
 
-[Pull request]()
+[Pull request](https://github.com/B10nicle/movies-explorer-frontend/pull/2)
