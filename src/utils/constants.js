@@ -1,6 +1,6 @@
 export const moviesUrl = "https://api.nomoreparties.co/beatfilm-movies";
-export const baseUrl = "https://api.project.nomoredomains.rocks";
-//export const baseUrl = "http://localhost:3000";
+//export const baseUrl = "https://api.project.nomoredomains.rocks";
+export const baseUrl = "http://localhost:3000";
 export const moviesApi = "https://api.nomoreparties.co";
 
 export const MAX_MOVIES_1280 = 12;
