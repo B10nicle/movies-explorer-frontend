@@ -55,7 +55,7 @@ function Authorization(props) {
                         />
                     </li>
                     <p className="authorization__validation-text">
-                        {errors.email && "regex: \"[A-Za-z0-9._+\\-']+@[A-Za-z0-9.\\-]+\\.[A-Za-z]{2,}$\""}
+                        {errors.email && "Пример email: user@example.com"}
                     </p>
                     <li className="authorization__part-form">
                         <p className="authorization__name">Пароль</p>
@@ -74,7 +74,8 @@ function Authorization(props) {
                         />
                     </li>
                     <p className="authorization__validation-text">
-                        {errors.password && "regex: ^(?=\\S*[a-z])(?=\\S*[A-Z])(?=\\S*\\d)(?=\\S*[^\\w\\s])\\S{8,}$"}
+                        {errors.password && "Пароль должен содержать как минимум 8 символов. Одну букву нижнего " +
+                            "регистра, одну верхнего, одну цифру и хотя бы один спецсимвол"}
                     </p>
                 </ul>
                 <div className="authorization__confirm">
