@@ -115,6 +115,12 @@
     opacity: .6;
 }
 
+.authorization__confirm-button_disable {
+    background: #F8F8F8;
+    color: #C2C2C2;
+    cursor: auto;
+}
+
 .authorization__confirm-container {
     margin: 16px auto 70px auto;
     justify-content: flex-start;
