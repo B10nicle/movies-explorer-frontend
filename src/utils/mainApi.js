@@ -66,7 +66,7 @@ export async function saveMovie({
             year: year,
             description: description,
             image: `${moviesApi}${image.url}`,
-            trailerLink: trailerLink,
+            trailer: trailerLink,
             nameEN: nameEN,
             nameRU: nameRU,
             thumbnail: `${moviesApi}${image.formats.thumbnail.url}`,

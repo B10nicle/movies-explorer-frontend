@@ -1,6 +1,6 @@
 import {CurrentUserContext} from "../../context/CurrentUserContext";
-import {Route, Routes, useNavigate} from "react-router-dom";
 import SavedMovies from "../Movies/SavedMovies/SavedMovies";
+import {Route, Routes, useNavigate} from "react-router-dom";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import React, {useState, useEffect} from "react";
@@ -27,16 +27,55 @@ function App() {
     const [render, setRender] = useState(false);
     const navigate = useNavigate();
 
-    const handleRegistration = async (data) => {
+    useEffect(() => {
+        handleTokenCheck();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const handleSaveMovie = async () => {
         try {
-            await auth.registration(data);
-            await handleAuthorization(data);
-            setIsRegistrationSuccessful(true);
-            setMessage("Пользователь успешно зарегистрирован");
-            setIsInfoTooltipOpen(true);
-        } catch (error) {
-            setMessage(handlerError(error.status));
-            setIsInfoTooltipOpen(true);
+            const data = await api.getMovies();
+            setSavedMovies(data);
+        } catch (e) {
+            console.warn(e);
+        }
+    };
+
+    const handleTokenCheck = async () => {
+        const jwt = localStorage.getItem("jwt");
+        if (!jwt) {
+            setRender(true);
+            return;
+        }
+        try {
+            await handleSaveMovie();
+            const userInfo = await api.getUserInfo();
+            setCurrentUser(userInfo);
+            setLoggedIn(true);
+            setRender(true);
+        } catch (e) {
+            console.warn(e);
+            setRender(true);
+        }
+    };
+
+    const handleSaveMovies = async (data) => {
+        try {
+            console.log(await api.saveMovie(data));
+            await handleSaveMovie();
+        } catch (e) {
+            console.warn(e);
+            return e;
+        }
+    };
+
+    const handleDeleteMovies = async (data) => {
+        try {
+            console.log(await api.deleteMovies(data));
+            await handleSaveMovie();
+        } catch (e) {
+            console.warn(e);
+            return e;
         }
     };
 
@@ -56,6 +95,20 @@ function App() {
         }
     };
 
+    const handleRegistration = async (data) => {
+        try {
+            await auth.registration(data);
+            await handleAuthorization(data);
+            setIsRegistrationSuccessful(true);
+            setMessage("Пользователь успешно зарегистрирован");
+            setIsInfoTooltipOpen(true);
+        } catch (error) {
+            const errorServer = handlerError(error.status);
+            setMessage(errorServer);
+            setIsInfoTooltipOpen(true);
+        }
+    };
+
     const handleUpdateUserInfo = async (data) => {
         try {
             if (!data.name)
@@ -68,7 +121,8 @@ function App() {
                     ...data,
                     email: currentUser.email,
                 };
-            setCurrentUser(await api.updateUserInfo(data));
+            const userData = await api.updateUserInfo(data);
+            setCurrentUser(userData);
             setIsRegistrationSuccessful(true);
             setMessage("Изменения успешно сохранены");
             setIsInfoTooltipOpen(true);
@@ -79,68 +133,18 @@ function App() {
         }
     };
 
-    const handleSaveMovie = async () => {
-        try {
-            setSavedMovies(await api.getMovies());
-        } catch (e) {
-            console.warn(e);
-        }
-    };
-
-    const handleTokenCheck = async () => {
-        const jwt = localStorage.getItem("jwt");
-        if (!jwt) {
-            setRender(true);
-            return;
-        }
-        try {
-            await handleSaveMovie();
-            setCurrentUser(await api.getUserInfo());
-            setLoggedIn(true);
-            setRender(true);
-        } catch (e) {
-            console.warn(e);
-            setRender(true);
-        }
-    };
-
-    const handleSaveMovies = async (data) => {
-        try {
-            setSavedMovies([...savedMovies, await api.saveMovie(data)]);
-        } catch (e) {
-            console.warn(e);
-        }
-    };
-
-    const handleDeleteMovies = async (data) => {
-        try {
-            console.log(await api.deleteMovies(data));
-            setSavedMovies((item) =>
-                item.filter((m) => m.id !== data)
-            );
-        } catch (e) {
-            console.warn(e);
-            return e;
-        }
-    };
-
     const handleLoginOut = () => {
-        setLoggedIn(false);
         localStorage.removeItem("findMovies");
         localStorage.removeItem("checkbox");
         localStorage.removeItem("line");
         localStorage.removeItem("jwt");
+        setLoggedIn(false);
         navigate("/");
     };
 
     const closeAllPopups = () => {
         setIsInfoTooltipOpen(false);
     };
-
-    useEffect(() => {
-        handleTokenCheck();
-        // eslint-disable-next-line
-    }, []);
 
     return (
         <CurrentUserContext.Provider value={currentUser}>

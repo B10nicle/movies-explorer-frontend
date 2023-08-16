@@ -1,75 +1,84 @@
-import SearchErrorServer from "../SearchErrorServer/SearchErrorServer";
-import MoviesCardList from "../../MoviesCardList/MoviesCardList";
-import {searchCards} from "../../../utils/searchMovies";
-import SearchError from "../SearchError/SearchError";
-import SearchForm from "../SearchForm/SearchForm";
-import React, {useState, useEffect} from "react";
-import Preloader from "../Preloader/Preloader";
+import React, { useState, useEffect } from "react";
 import "./SavedMovies.css";
+import SearchForm from "../SearchForm/SearchForm";
+import MoviesCardList from "../../MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
+import { searchCards } from "../../../utils/searchMovies";
+import SearchError from "../SearchError/SearchError";
+import SearchErrorServer from "../SearchErrorServer/SearchErrorServer";
 
-const SavedMovies = ({savedMovies, onSave, onDelete}) => {
-    const [newSavedMovies, setNewSavedMovies] = useState(null);
-    const [requestError, setRequestError] = useState(false);
-    const [notFind, setNotFind] = useState(false);
-    const [render, setRender] = useState(true);
-    const [movies, setMovies] = useState([]);
+const SavedMovies = ({ savedMovies, onSave, onDelete }) => {
+    const [movies, setMovies] = useState([]); // сохранение фильмов для поиска
+    const [render, setRender] = useState(true); // состояние загрузки фильмов из базы
+    const [notFind, setNotFind] = useState(false); // пользователь не найден
+    const [requestEror, setRequestEror] = useState(false); // ошибка запроса
+    const [newSavedMovies, setNewSavedMovies] = useState(null); // список сохраненных фильмов
 
-    useEffect(() => {
-        if (newSavedMovies) setMovies(newSavedMovies);
-    }, [newSavedMovies])
-
+    // разрузка сохраненных фильмов
     useEffect(() => {
         setMovies(savedMovies);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleDeleteMovies = async (card) => {
-        const answer = await onDelete(card);
 
-        if (answer) return answer
-
-        const savedMoviesNew = movies.slice();
-
-        savedMoviesNew.splice(movies.findIndex((a) => a._id === card), 1);
-        movies.splice(movies.findIndex((a) => a._id === card), 1);
-
-        setNewSavedMovies(savedMoviesNew);
-    }
-
+    // поиск фильмов
     const handleSearchCards = async (line, checkbox) => {
         try {
             setRender(false);
-            setRequestError(false);
+            setRequestEror(false);
             setNotFind(false);
-            const tagSavedMovies = true
+            const  tagSavedMovies = true
             const findMovies = searchCards(savedMovies, line, checkbox, tagSavedMovies);
-
-            if (findMovies.length === 0) setNotFind(true);
-            else setNotFind(false);
-
+            if (findMovies.length === 0) {
+                setNotFind(true);
+            } else {
+                setNotFind(false);
+            }
             setMovies(findMovies);
             setRender(true);
         } catch (e) {
-            setRequestError(true);
+            setRequestEror(true);
             console.warn(e);
         }
     };
 
-    return (
+
+    // удаление сохраненного фильма
+    const handleDeleteMovies = async (card) => {
+        const answer = await onDelete(card, true);
+        console.log(answer)
+        if(answer) return answer
+        const savedMoviesNew = movies.slice();
+        savedMoviesNew.splice(movies.findIndex((a) => a._id === card), 1);
+        movies.splice(movies.findIndex((a) => a._id === card), 1);
+        setNewSavedMovies(savedMoviesNew);
+    }
+
+    // рендер списока фильмов при удалении
+    useEffect(()=> {
+        if(newSavedMovies) {
+            setMovies(newSavedMovies);
+        }
+    }, [newSavedMovies])
+
+
+    return  (
         <main className="content">
             <section className="saved-movies">
-                <SearchForm onCard={handleSearchCards} tag="saved-movies"/>
-                {notFind && <SearchError/>}
-                {requestError && <SearchErrorServer/>}
-                {render
-                    ? <MoviesCardList
-                        onDelete={handleDeleteMovies}
+                <SearchForm onCard={handleSearchCards} tag="saved-movies" />
+                {notFind && <SearchError />}
+                {requestEror && <SearchErrorServer />}
+                {render ? (
+                    <MoviesCardList
+                        cards={movies}
                         flag="delete-favorites-btn"
                         savedMovies={savedMovies}
                         onSave={onSave}
-                        cards={movies}/>
-                    : <Preloader/>
-                }
+                        onDelete={handleDeleteMovies}
+                    />
+                ) : (
+                    <Preloader />
+                )}
             </section>
         </main>
     );
