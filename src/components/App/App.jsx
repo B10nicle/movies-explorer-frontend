@@ -116,7 +116,7 @@ function App() {
         try {
             console.log(await api.deleteMovies(data));
             setSavedMovies((item) =>
-                item.filter((m) => m._id !== data)
+                item.filter((m) => m.id !== data)
             );
         } catch (e) {
             console.warn(e);

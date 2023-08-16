@@ -11,7 +11,7 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
         if (savedMovies) {
             savedMovies.forEach((movies) => {
                 if (movies.movieId === card.id || movies.id === card.id) {
-                    setSaveMovieId(movies._id);
+                    setSaveMovieId(movies.id);
                     setSaveMovie(true);
                 }
             });
@@ -22,6 +22,8 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
     }, [savedMovies]);
 
     const handleSaveMovie = async () => {
+        console.log(card);
+
         if (!saveMovie && flag === "add-favorites-btn") {
             try {
                 const answer = await onSave(card);
@@ -32,8 +34,8 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
             }
         }
         try {
-            if (card._id) {
-                const answer = await onDelete(card._id);
+            if (card.id) {
+                const answer = await onDelete(card.id);
                 if(answer) return
                 return setSaveMovie(false);
             }
