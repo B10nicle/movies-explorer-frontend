@@ -1,13 +1,12 @@
-import React from "react";
 import { useState, useEffect } from "react";
 import "./MoviesCard.css";
+import React from "react";
 
 const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
-    const [saveMovie, setSaveMovie] = useState(false); // состояние лайка
-    const [saveMovieId, setSaveMovieId] = useState(null); // id фильма для его удаления
-    const [render, setRender] = useState(false); // состояние загрузки фильмов из базы
+    const [saveMovieId, setSaveMovieId] = useState(null);
+    const [saveMovie, setSaveMovie] = useState(false);
+    const [render, setRender] = useState(false);
 
-    // получение лайков
     useEffect(() => {
         if (savedMovies) {
             savedMovies.forEach((movies) => {
@@ -21,7 +20,6 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [savedMovies]);
 
-    // сохраненение или удаление лайка
     const handleSaveMovie = async () => {
         if (!saveMovie && flag === "add-favorites-btn") {
             try {
@@ -39,8 +37,8 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
                 if(answer) return
                 return setSaveMovie(false);
             }
-            const answer = await onDelete(saveMovieId);
-            if(answer) return
+            const result = await onDelete(saveMovieId);
+            if(result) return
             return setSaveMovie(false);
         } catch (e) {
             console.warn(e);
@@ -53,30 +51,27 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
                 <div className="movies-card__info">
                     <div className="movies-card__info-container">
                         <h2 className="movies-card__title">{card.nameRU}</h2>
-                        <p className="movies-card__time">{`${Math.floor(
-                            card.duration / 60
-                        )}ч ${card.duration % 60}м`}</p>
+                        <p className="movies-card__time">
+                            {`${Math.floor(card.duration / 60)}ч ${card.duration % 60}м`}</p>
                     </div>
                     <button
                         className={`movies-card__${flag} movies-card__${flag}_${
-                            saveMovie ? "active" : ""
-                        }`}
+                            saveMovie ? "active" : ""}`}
                         onClick={handleSaveMovie}
                         type="button"
                     ></button>
                 </div>
                 <a
-                    href={card.trailerLink ? card.trailerLink : card.trailer
-                    }
+                    href={card.trailerLink ? card.trailerLink : card.trailer}
                     className="movies-card__link"
-                    target="_blank"
                     rel="noopener noreferrer"
+                    target="_blank"
                 >
                     <img
                         className="movies-card__image"
                         src={
                             card.image.url
-                                ? `https://api.nomoreparties.co/${card.image.url}`
+                                ? `https://api.nomoreparties.co${card.image.url}`
                                 : card.image
                         }
                         alt={card.nameRU}
