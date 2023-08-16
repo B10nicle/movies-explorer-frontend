@@ -33,8 +33,9 @@ const MoviesCard = ({ card, flag, savedMovies, onSave, onDelete }) => {
         try {
             if (card._id) {
                 const answer = await onDelete(card._id);
-                console.log(answer)
+
                 if(answer) return
+
                 return setSaveMovie(false);
             }
             const result = await onDelete(saveMovieId);
