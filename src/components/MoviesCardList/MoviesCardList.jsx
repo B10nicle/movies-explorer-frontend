@@ -1,6 +1,6 @@
 import ScrollMoviesBtn from "../ScrollMoviesBtn/ScrollMoviesBtn";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import "./MoviesCardList.css";
 import React from "react";
 import {
@@ -10,9 +10,11 @@ import {
     MAX_MOVIES_STEP_1280,
     MAX_MOVIES_STEP_768,
     MAX_MOVIES_STEP_480,
+    MAX_WINDOW_SIZE_480,
+    MAX_WINDOW_SIZE_1280,
 } from "../../utils/constants";
 
-const MoviesCardList = ({ cards, flag, savedMovies, onSave, onDelete }) => {
+const MoviesCardList = ({cards, flag, savedMovies, onSave, onDelete}) => {
     const [maxMovies, setMaxMovies] = useState(0);
     const [step, setStep] = useState(0);
     const [rerender, setRerender] = useState();
@@ -21,7 +23,7 @@ const MoviesCardList = ({ cards, flag, savedMovies, onSave, onDelete }) => {
         setTimeout(() => {
             const count = Array.from(document.querySelectorAll(".movies-card__card"))
                 .reduce(
-                    (acc, { offsetTop: n }) => (
+                    (acc, {offsetTop: n}) => (
                         acc[acc.length - 1]?.[0] === n || acc.push([n, 0]),
                             acc[acc.length - 1][1]++,
                             acc
@@ -40,7 +42,7 @@ const MoviesCardList = ({ cards, flag, savedMovies, onSave, onDelete }) => {
             setTimeout(() => {
                 const count = Array.from(document.querySelectorAll(".movies-card__card"))
                     .reduce(
-                        (acc, { offsetTop: n }) => (
+                        (acc, {offsetTop: n}) => (
                             acc[acc.length - 1]?.[0] === n
                             || acc.push([n, 0]),
                                 acc[acc.length - 1][1]++,
@@ -60,12 +62,14 @@ const MoviesCardList = ({ cards, flag, savedMovies, onSave, onDelete }) => {
         setMaxMovies(maxMovies + step);
     };
 
-    const setMoviesRules = (count) => {
+    const setMoviesRules = () => {
         setMaxMovies(cards.length);
-        if (count === 1) {
+        const currentSize = window.innerWidth;
+
+        if (currentSize < MAX_WINDOW_SIZE_480) {
             setMaxMovies(MAX_MOVIES_480);
             setStep(MAX_MOVIES_STEP_480);
-        } else if (count === 2) {
+        } else if (currentSize > MAX_WINDOW_SIZE_480 && currentSize < MAX_WINDOW_SIZE_1280) {
             setMaxMovies(MAX_MOVIES_768);
             setStep(MAX_MOVIES_STEP_768);
         } else {
