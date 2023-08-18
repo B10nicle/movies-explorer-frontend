@@ -57,6 +57,11 @@
   color: #000000;
 }
 
+.profile__btn_disable {
+  color: #C2C2C2;
+  cursor: auto;
+}
+
 .profile__btn_type_logout {
   font-weight: 500;
   color: #EE3465;
@@ -150,3 +155,4 @@
     margin: 0 0 0;
   }
 }
+
